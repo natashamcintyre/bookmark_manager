@@ -5,6 +5,10 @@ class BookmarkManager < Sinatra::Base
     erb :index
   end
 
+  get '/bookmarks' do
+    erb :bookmarks
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end
