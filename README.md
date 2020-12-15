@@ -12,7 +12,7 @@
 
 ### Domain Model
 User Story 1 Diagram:
-![US1 Domain Diagram](https://github.com/chriswhitehouse/bookmark_manager/tree/main/diagrams)
+![US1 Domain Diagram](https://github.com/chriswhitehouse/bookmark_manager/blob/main/diagrams/user_story_1_diagram.svg)
 
 Objects: user, bookmark, bookmark(list)
 Properties: name, url,
