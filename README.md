@@ -10,6 +10,18 @@ When: I want to view historic bookmarks
 Then: the website should return a list of bookmarks
 ```
 
+
+```
+As a User
+So that I can save a page for quick access
+I want to be able to add a bookmark to the database
+```
+```
+Given: that I have visited a useful page I want to revisit quickly
+When: I want to store it
+Then: the bookmark should be stored safely in the database
+```
+
 ### Domain Model
 User Story 1 Diagram:
 
