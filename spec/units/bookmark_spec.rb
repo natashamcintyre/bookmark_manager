@@ -10,4 +10,11 @@ describe Bookmark do
       expect(described_class.all).to eq bookmarks
     end
   end
+
+  describe '#create' do
+    it 'creates an instance of bookmark' do 
+       Bookmark.create(url: 'www.test.com')
+      expect(Bookmark.all).to include 'www.test.com'
+    end
+  end
 end

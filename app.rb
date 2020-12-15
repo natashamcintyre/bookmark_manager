@@ -15,8 +15,12 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/save_bookmark' do
-    p params[:url]
+    Bookmark.create(url: params[:url])
+    p "Bookmark saved!"
+    redirect '/bookmarks'
   end
+
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0
