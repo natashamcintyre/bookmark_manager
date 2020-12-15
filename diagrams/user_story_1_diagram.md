@@ -1,0 +1,11 @@
+alias client="/bookmarks"
+alias controller="app"
+alias model="Bookmark"
+alias view="erb bookmarks"
+
+client->controller: "get request"
+controller->model: ".all"
+model->controller: "[bookmarks]"
+controller->view: "[bookmarks]"
+view->controller: "html"
+controller->client: "response"
