@@ -3,11 +3,15 @@ nouns in **bold**
 actions in *italics*
 
 >As a **User**
+
 >So that I can keep track of my bookmarks
+
 >I want to be able to *see a list* of **bookmarks**
 
 >**Given** that I have previously bookmarked sites
+
 >**When** I want to view historic bookmarks
+
 >**Then** the website should return a list of bookmarks
  
 
