@@ -2,12 +2,13 @@
 nouns in **bold**
 actions in *italics*
 
->As a **User**;
->So that I can keep track of my bookmarks
+```
+As a **User**;
+So that I can keep track of my bookmarks
+I want to be able to *see a list* of **bookmarks**
+```
 
->I want to be able to *see a list* of **bookmarks**
-
->**Given** that I have previously bookmarked sites
+Given** that I have previously bookmarked sites
 
 >**When** I want to view historic bookmarks
 
