@@ -2,8 +2,7 @@
 nouns in **bold**
 actions in *italics*
 
->As a **User**
-
+>As a **User**;
 >So that I can keep track of my bookmarks
 
 >I want to be able to *see a list* of **bookmarks**
