@@ -10,7 +10,7 @@ class Bookmark
     if ENV['RACK_ENV'] == 'test'
       conn = PG.connect(dbname: 'bookmark_manager_test')
     else
-      conn = PG.connect( dbname: 'bookmark_manager')
+      conn = PG.connect(dbname: 'bookmark_manager')
     end
 
     table = conn.exec("SELECT * FROM bookmarks")
