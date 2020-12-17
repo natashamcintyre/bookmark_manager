@@ -6,8 +6,8 @@ feature 'viewing bookmarks' do
 
     visit('/bookmarks')
 
-    expect(page).to have_content "Makers"
-    expect(page).to have_content "Twitter"
-    expect(page).to have_content "Destruction"
+    expect(page).to have_link 'Makers', href: 'http://www.makersacademy.com'
+    expect(page).to have_link 'Twitter', href: 'http://www.twitter.com'
+    expect(page).to have_link 'Destruction', href: 'http://destroyallsoftware.com'
   end
 end
