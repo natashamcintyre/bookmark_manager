@@ -1,7 +1,5 @@
 feature 'add new bookmark' do
   scenario 'saves bookmark in database and displays in bookmark list' do
-    PG.connect(dbname: 'bookmark_manager_test')
-
     visit('/bookmarks/new')
     fill_in('url', with: 'www.test.com')
     fill_in('title', with: 'TestTitle')
