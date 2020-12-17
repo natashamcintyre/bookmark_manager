@@ -2,8 +2,12 @@ require 'pg'
 
 class Bookmark
 
-  def initialize(url)
+  attr_reader :url, :title, :id
+
+  def initialize(url, title, id)
     @url = url
+    @title = title
+    @id = id
   end
 
   def self.all
@@ -23,7 +27,7 @@ class Bookmark
     else
       conn = PG.connect(dbname: 'bookmark_manager')
     end
-
-    table = conn.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}', '#{title}')")
+    result = conn.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}', '#{title}') RETURNING id, url, title")
+    Bookmark.new(result[0]['url'], result[0]['title'], result[0]['id'])
   end
 end

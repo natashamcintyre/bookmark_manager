@@ -22,4 +22,11 @@ describe Bookmark do
       expect(Bookmark.all).to include 'testtitle'
     end
   end
+
+  describe 'url' do
+    it 'returns the url of the bookmark object' do
+      bookmark = Bookmark.create(url: 'www.test.com', title: 'testtitle')
+      expect(bookmark.url).to eq 'www.test.com'
+    end
+  end
 end
