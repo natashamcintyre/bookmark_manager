@@ -39,10 +39,9 @@ Capybara.app = BookmarkManager
 #
 # The `.rspec` file also contains a few flags that are not defaults but that
 # users commonly want.
-#
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  config.before(:each) do 
+  config.before(:each) do
     setup_test_database
   end
   config.include Capybara::DSL
