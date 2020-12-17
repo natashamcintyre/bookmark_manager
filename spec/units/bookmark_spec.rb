@@ -2,24 +2,20 @@ describe Bookmark do
 
   describe '#all' do
     it "returns a list of all saved bookmarks" do
-      conn = PG.connect(dbname: 'bookmark_manager_test')
-      conn.exec("INSERT INTO bookmarks (url) VALUES('http://www.makersacademy.com');")
-      conn.exec("INSERT INTO bookmarks (url) VALUES('http://www.twitter.com');")
-      conn.exec("INSERT INTO bookmarks (url) VALUES('http://www.destroyallsoftware.com');")
+      Bookmark.create(url: 'www.test.com', title: 'testtitle')
+      Bookmark.create(url: 'www.test2.com', title: 'testtitle2')
 
       bookmarks = Bookmark.all
 
-      expect(bookmarks).to include('http://www.makersacademy.com')
-      expect(bookmarks).to include('http://www.twitter.com')
-      expect(bookmarks).to include('http://www.destroyallsoftware.com')
+      expect(bookmarks.first.url).to eq 'www.test.com'
+      expect(bookmarks.last.url).to eq 'www.test2.com'
     end
   end
 
   describe '#create' do
     it 'creates an instance of bookmark' do
-      Bookmark.create(url: 'www.test.com', title: 'testtitle')
-      expect(Bookmark.all).to include 'www.test.com'
-      expect(Bookmark.all).to include 'testtitle'
+      bookmark = Bookmark.create(url: 'www.test.com', title: 'testtitle')
+      expect(bookmark).to be_instance_of Bookmark
     end
   end
 

@@ -4,7 +4,8 @@ feature 'add new bookmark' do
 
     visit('/bookmarks/new')
     fill_in('url', with: 'www.test.com')
+    fill_in('title', with: 'TestTitle')
     click_button('Save bookmark')
-    expect(page).to have_content 'www.test.com'
+    expect(page).to have_content 'TestTitle'
   end
 end

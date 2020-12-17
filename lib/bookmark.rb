@@ -18,7 +18,7 @@ class Bookmark
     end
 
     table = conn.exec("SELECT * FROM bookmarks")
-    table.map { |bookmark| bookmark['url'] + bookmark['title'] }
+    table.map { |bookmark| Bookmark.new(bookmark['url'], bookmark['title'], bookmark['id']) }
   end
 
   def self.create(url:, title:)
