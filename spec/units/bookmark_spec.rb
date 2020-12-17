@@ -29,7 +29,7 @@ describe Bookmark do
   describe '#delete' do
     it 'deletes a bookmark from the database' do
       bookmark = Bookmark.create(url: "www.deleteme.com", title: "Delete Me")
-      bookmark.delete
+      Bookmark.delete(bookmark.url)
       expect(Bookmark.all).to_not include bookmark
     end
   end

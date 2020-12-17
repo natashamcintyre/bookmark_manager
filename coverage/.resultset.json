@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/olivernorman/Makers/Projects/bookmark_manager/app.rb": {
+      "/Users/Student/Projects/Makers-Week4/bookmark_manager/app.rb": {
         "lines": [
           1,
           null,
@@ -11,8 +11,8 @@
           null,
           null,
           1,
-          3,
-          3,
+          4,
+          4,
           null,
           null,
           1,
@@ -23,6 +23,12 @@
           2,
           2,
           2,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
           null,
           null,
           null,
@@ -30,7 +36,7 @@
           null
         ]
       },
-      "/Users/olivernorman/Makers/Projects/bookmark_manager/lib/bookmark.rb": {
+      "/Users/Student/Projects/Makers-Week4/bookmark_manager/lib/bookmark.rb": {
         "lines": [
           1,
           null,
@@ -45,14 +51,14 @@
           null,
           null,
           1,
-          5,
-          5,
+          6,
+          6,
           null,
           0,
           null,
           null,
-          5,
-          12,
+          6,
+          13,
           null,
           null,
           1,
@@ -66,17 +72,17 @@
           null,
           null,
           1,
-          1,
-          1,
+          2,
+          2,
           null,
           0,
           null,
-          1,
+          2,
           null,
           null
         ]
       },
-      "/Users/olivernorman/Makers/Projects/bookmark_manager/spec/features/add_bookmark_spec.rb": {
+      "/Users/Student/Projects/Makers-Week4/bookmark_manager/spec/features/add_bookmark_spec.rb": {
         "lines": [
           1,
           1,
@@ -89,7 +95,7 @@
           null
         ]
       },
-      "/Users/olivernorman/Makers/Projects/bookmark_manager/spec/features/delete_bookmark_spec.rb": {
+      "/Users/Student/Projects/Makers-Week4/bookmark_manager/spec/features/delete_bookmark_spec.rb": {
         "lines": [
           1,
           1,
@@ -98,12 +104,12 @@
           1,
           1,
           1,
-          0,
+          1,
           null,
           null
         ]
       },
-      "/Users/olivernorman/Makers/Projects/bookmark_manager/spec/features/setup_spec.rb": {
+      "/Users/Student/Projects/Makers-Week4/bookmark_manager/spec/features/setup_spec.rb": {
         "lines": [
           1,
           1,
@@ -113,7 +119,7 @@
           null
         ]
       },
-      "/Users/olivernorman/Makers/Projects/bookmark_manager/spec/features/view_bookmarks_spec.rb": {
+      "/Users/Student/Projects/Makers-Week4/bookmark_manager/spec/features/view_bookmarks_spec.rb": {
         "lines": [
           1,
           1,
@@ -130,7 +136,7 @@
           null
         ]
       },
-      "/Users/olivernorman/Makers/Projects/bookmark_manager/spec/units/bookmark_spec.rb": {
+      "/Users/Student/Projects/Makers-Week4/bookmark_manager/spec/units/bookmark_spec.rb": {
         "lines": [
           1,
           null,
@@ -171,6 +177,6 @@
         ]
       }
     },
-    "timestamp": 1608224079
+    "timestamp": 1608225854
   }
 }

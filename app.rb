@@ -16,7 +16,11 @@ class BookmarkManager < Sinatra::Base
 
   post '/save_bookmark' do
     Bookmark.create(url: params[:url], title: params[:title])
-    p "Bookmark saved!"
+    redirect '/bookmarks'
+  end
+
+  post '/delete' do
+    Bookmark.delete(params[:url_to_delete])
     redirect '/bookmarks'
   end
 
