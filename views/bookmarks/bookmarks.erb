@@ -5,8 +5,14 @@
         <%= bookmark.title %>
       </a>
       <form action="/delete" method="post">
+        <input name="_method" type="hidden" value="delete">
         <button type="submit" id="TestTitle-delete" name="url_to_delete" value="<%= bookmark.url %>">
           Delete
+        </button>
+      </form>
+      <form action="/update" method="get">
+        <button type="submit" id="TestTitle-update" name="id" value="<%= bookmark.id %>">
+          Update
         </button>
       </form>
     </li>

@@ -33,4 +33,13 @@ describe Bookmark do
       expect(Bookmark.all).to_not include bookmark
     end
   end
+
+  describe '#update' do
+    it 'updates a bookmark in the database' do
+      bookmark = Bookmark.create(url: "www.updateme.com", title: "Update me")
+      Bookmark.update(id: bookmark.id, new_url: "www.updated.com", new_title: "Updated!")
+      expect(Bookmark.all[0].url).to eq "www.updated.com"
+      expect(Bookmark.all[0].title).to eq "Updated!"
+    end
+  end
 end
