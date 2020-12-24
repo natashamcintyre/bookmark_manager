@@ -7,6 +7,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 group :development, :test do
   gem 'rspec-sinatra'
   gem 'sinatra'
+  gem 'sinatra-flash'
   gem 'capybara'
   gem 'rspec'
   gem "rubocop", "0.79.0"

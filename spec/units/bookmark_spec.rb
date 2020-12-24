@@ -1,45 +1,71 @@
+require 'database_helpers'
+
 describe Bookmark do
 
   describe '#all' do
     it "returns a list of all saved bookmarks" do
-      Bookmark.create(url: 'www.test.com', title: 'testtitle')
-      Bookmark.create(url: 'www.test2.com', title: 'testtitle2')
+      Bookmark.create(url: 'http://www.test.com', title: 'testtitle')
+      Bookmark.create(url: 'http://www.test2.com', title: 'testtitle2')
 
       bookmarks = Bookmark.all
 
-      expect(bookmarks.first.url).to eq 'www.test.com'
-      expect(bookmarks.last.url).to eq 'www.test2.com'
+      expect(bookmarks.first.url).to eq 'http://www.test.com'
+      expect(bookmarks.last.url).to eq 'http://www.test2.com'
     end
   end
 
   describe '#create' do
     it 'creates an instance of bookmark' do
-      bookmark = Bookmark.create(url: 'www.test.com', title: 'testtitle')
-      expect(bookmark).to be_instance_of Bookmark
+      bookmark = Bookmark.create(url: 'http://www.test.com', title: 'testtitle')
+      persisted_data = persisted_data(table: 'bookmarks', id: bookmark.id)
+
+      expect(bookmark).to be_a Bookmark
+      expect(bookmark.id).to eq persisted_data['id']
+      expect(bookmark.title).to eq 'testtitle'
+      expect(bookmark.url).to eq 'http://www.test.com'
     end
+
+    it "does not create an invalid bookmark" do
+      Bookmark.create(url: 'not valid', title: 'invalid bookmark')
+      expect(Bookmark.all).to be_empty
+    end
+
   end
 
   describe 'url' do
     it 'returns the url of the bookmark object' do
-      bookmark = Bookmark.create(url: 'www.test.com', title: 'testtitle')
-      expect(bookmark.url).to eq 'www.test.com'
+      bookmark = Bookmark.create(url: 'http://www.test.com', title: 'testtitle')
+      expect(bookmark.url).to eq 'http://www.test.com'
     end
   end
 
   describe '#delete' do
     it 'deletes a bookmark from the database' do
-      bookmark = Bookmark.create(url: "www.deleteme.com", title: "Delete Me")
-      Bookmark.delete(bookmark.url)
+      bookmark = Bookmark.create(url: "http://www.deleteme.com", title: "Delete Me")
+      Bookmark.delete(bookmark.id)
       expect(Bookmark.all).to_not include bookmark
     end
   end
 
   describe '#update' do
     it 'updates a bookmark in the database' do
-      bookmark = Bookmark.create(url: "www.updateme.com", title: "Update me")
-      Bookmark.update(id: bookmark.id, new_url: "www.updated.com", new_title: "Updated!")
-      expect(Bookmark.all[0].url).to eq "www.updated.com"
-      expect(Bookmark.all[0].title).to eq "Updated!"
+      bookmark = Bookmark.create(url: "http://www.updateme.com", title: "Update me")
+      Bookmark.update(id: bookmark.id, new_url: "http://www.updated.com", new_title: "Updated!")
+      persisted_data = persisted_data(table: 'bookmarks', id: bookmark.id)
+
+      expect(persisted_data['url']).to eq "http://www.updated.com"
+      expect(persisted_data['title']).to eq "Updated!"
+    end
+  end
+
+  let(:comment_class) { double(:comment_class) }
+
+  describe '#comments' do
+    it "calls .where on the Comment class" do
+      bookmark = Bookmark.create(url: "http://www.urlneedscomment.com", title: "Add comment to me")
+      expect(comment_class).to receive(:where).with(bookmark_id: bookmark.id)
+
+      bookmark.comments(comment_class)
     end
   end
 end

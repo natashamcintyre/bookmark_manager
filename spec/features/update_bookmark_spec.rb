@@ -3,7 +3,7 @@ require_relative './web_helper.rb'
 feature 'update a bookmark' do
   scenario 'takes user to update page' do
     add_a_bookmark
-    click_button('TestTitle-update')
+    first('.bookmark').click_button('Edit')
     expect(page).to have_button 'Update'
     expect(page).to have_field 'url'
     expect(page).to have_field 'title'
@@ -11,7 +11,7 @@ feature 'update a bookmark' do
 
   scenario 'updates the content of the database' do
     add_a_bookmark
-    click_button('TestTitle-update')
+    first('.bookmark').click_button('Edit')
     fill_in 'url', with: 'www.testurlupdated.com'
     fill_in 'title', with: 'TestTitleUpdated'
     click_button 'Update'

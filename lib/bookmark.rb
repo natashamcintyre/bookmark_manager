@@ -1,4 +1,6 @@
 require 'pg'
+require_relative './databaseconnection.rb'
+require_relative './comment.rb'
 
 class Bookmark
 
@@ -11,44 +13,44 @@ class Bookmark
   end
 
   def self.all
-    if ENV['RACK_ENV'] == 'test'
-      conn = PG.connect(dbname: 'bookmark_manager_test')
-    else
-      conn = PG.connect(dbname: 'bookmark_manager')
+    result = DatabaseConnection.query("SELECT * FROM bookmarks ORDER BY id")
+    result.map do |bookmark|
+      Bookmark.new(
+        bookmark['url'],
+        bookmark['title'],
+        bookmark['id']
+      )
     end
-
-    table = conn.exec("SELECT * FROM bookmarks ORDER BY id")
-    table.map { |bookmark|
-      Bookmark.new(bookmark['url'], bookmark['title'], bookmark['id'])
-    }
   end
 
   def self.create(url:, title:)
-    if ENV['RACK_ENV'] == 'test'
-      conn = PG.connect(dbname: 'bookmark_manager_test')
-    else
-      conn = PG.connect(dbname: 'bookmark_manager')
-    end
-    result = conn.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}', '#{title}') RETURNING id, url, title")
-    Bookmark.new(result[0]['url'], result[0]['title'], result[0]['id'])
+    return false unless Bookmark.is_url?(url)
+    result = DatabaseConnection.query("INSERT INTO bookmarks (url, title) VALUES('#{url}', '#{title}') RETURNING id, url, title")
+    Bookmark.new(
+      result[0]['url'],
+      result[0]['title'],
+      result[0]['id']
+    )
   end
 
-  def self.delete(url)
-    if ENV['RACK_ENV'] == 'test'
-      conn = PG.connect(dbname: 'bookmark_manager_test')
-    else
-      conn = PG.connect(dbname: 'bookmark_manager')
-    end
-    conn.exec("DELETE FROM bookmarks WHERE url='#{url}'")
+  def self.delete(id)
+    DatabaseConnection.query("DELETE FROM bookmarks WHERE id='#{id}'")
   end
 
   def self.update(id:, new_url:, new_title:)
-    if ENV['RACK_ENV'] == 'test'
-      conn = PG.connect(dbname: 'bookmark_manager_test')
-    else
-      conn = PG.connect(dbname: 'bookmark_manager')
-    end
-    conn.exec("UPDATE bookmarks SET url='#{new_url}', title='#{new_title}'
+  DatabaseConnection.query(
+    "UPDATE bookmarks SET url='#{new_url}', title='#{new_title}'
       WHERE id = #{id}")
   end
+
+  def comments(comment_class = Comment)
+    comment_class.where(bookmark_id: @id)
+  end
+
+  private
+
+  def self.is_url?(url)
+    url =~ /\A#{URI::regexp(['http', 'https'])}\z/
+  end
+
 end
