@@ -1,11 +1,19 @@
 <%= flash[:notice] %>
-
 <ul>
   <% @bookmarks.each do |bookmark| %>
     <li class="bookmark" id="bookmark-<%= bookmark.id %>">
       <a href="<%= bookmark.url %>" target="_blank">
         <%= bookmark.title %>
       </a>
+      <ul>
+        <% bookmark.tags.each do |tag| %>
+          <li>
+            <a href='/tags/<%= tag.id %>/bookmarks' target='_blank'>
+              <%= tag.content %>
+            </a>
+          </li>
+        <% end %>
+      </ul>
       <form action="/bookmarks/<%= bookmark.id %>" method="post">
         <input name="_method" type="hidden" value="DELETE" />
         <input type="submit" value="Delete" />
@@ -15,6 +23,9 @@
       </form>
       <form action="/bookmarks/<%= bookmark.id %>/comments/new" method="get">
         <input type="submit" value="Add Comment" />
+      </form>
+      <form action="/bookmarks/<%= bookmark.id %>/tags/new" method="get">
+        <input type="submit" value="Add Tag" />
       </form>
       <ul>
         <% bookmark.comments.each do |comment| %>

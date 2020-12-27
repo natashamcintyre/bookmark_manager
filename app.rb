@@ -1,6 +1,6 @@
-# REFACTORING ROUTES TO SAY BOOKMARKS/:ID ETC
-# NEED TO UPDATE DELETE AND UPDATE PATHS / MODEL
-# THEN ADDING COMMENTS TO BOOKMARKS
+# GOT UP TO FILTERING BOOKMARKS BY TAGS. NEED TO COMPLETE:
+# TAG.BOOKMARKS PART OF THE MANY-MANY RELATIONSHIP
+# ADD A GET /TAGS/:ID/BOOKMARKS ROUTE
 
 require 'sinatra/base'
 require 'sinatra/flash'
@@ -19,6 +19,7 @@ class BookmarkManager < Sinatra::Base
 
   get '/bookmarks' do
     @bookmarks = Bookmark.all
+    @tags = Tag.all
     erb :'bookmarks/index'
   end
 
@@ -51,10 +52,27 @@ class BookmarkManager < Sinatra::Base
     erb :'comments/new'
   end
 
-  post 'bookmarks/:id/comments' do
+  post '/bookmarks/:id/comments' do
     Comment.create(text: params[:comment], bookmark_id: params[:id])
     redirect '/bookmarks'
   end
+
+  get '/bookmarks/:id/tags/new' do
+    @bookmark_id = params[:id]
+    erb :'tags/new'
+  end
+
+  post '/bookmarks/:id/tags' do
+    tag = Tag.create(content: params[:Tag])
+    BookmarkTag.create(bookmark_id: params[:id], tag_id: tag.id)
+    redirect '/bookmarks'
+  end
+
+  get '/tags/:id/bookmarks' do
+    @tag = Tag.find(id: params[:id])
+    erb :'tags/index'
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end

@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <h1>Bookmarks with tag <%= @tag.content %></h1>
+    <ul>
+      <% @tag.bookmarks.each do |bookmark| %>
+        <li>
+          <a> href="<%= bookmark.url %>"
+            <%= bookmark.title %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </body>
+</html>
