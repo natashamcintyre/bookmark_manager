@@ -1,7 +1,15 @@
-require './lib/databaseconnection.rb'
+require 'active_record'
 
 if ENV['RACK_ENV'] == 'test'
-  DatabaseConnection.setup('bookmark_manager_test')
+  ActiveRecord::Base.establish_connection(
+    adapter: 'postgresql',
+    host: 'localhost',
+    database: 'bookmark_manager_test'
+  )
 else
-  DatabaseConnection.setup('bookmark_manager')
+  ActiveRecord::Base.establish_connection(
+    adapter: 'postgresql',
+    host: 'localhost',
+    database: 'bookmark_manager'
+  )
 end

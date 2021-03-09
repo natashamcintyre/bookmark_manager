@@ -1,7 +1,3 @@
-# GOT UP TO FILTERING BOOKMARKS BY TAGS. NEED TO COMPLETE:
-# TAG.BOOKMARKS PART OF THE MANY-MANY RELATIONSHIP
-# ADD A GET /TAGS/:ID/BOOKMARKS ROUTE
-
 require 'sinatra/base'
 require 'sinatra/flash'
 require './lib/bookmark'
@@ -33,7 +29,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   delete '/bookmarks/:id' do
-    Bookmark.delete(params[:id])
+    Bookmark.find_by(id: params[:id]).delete
     redirect '/bookmarks'
   end
 
@@ -43,7 +39,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/updateme' do
-    Bookmark.update(id: params[:id], new_url: params[:url], new_title: params[:title])
+    Bookmark.find_by(id: params[:id]).update(url: params[:url], title: params[:title])
     redirect '/bookmarks'
   end
 
@@ -69,7 +65,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/tags/:id/bookmarks' do
-    @tag = Tag.find(id: params[:id])
+    @tag = Tag.find_by(id: params[:id])
     erb :'tags/index'
   end
 

@@ -5,6 +5,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 group :development, :test do
+  gem 'activerecord'
   gem 'rspec-sinatra'
   gem 'sinatra'
   gem 'sinatra-flash'

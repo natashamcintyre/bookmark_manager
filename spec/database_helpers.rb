@@ -1,7 +1,5 @@
-require 'pg'
+require 'active_record'
 
-def persisted_data(table:, id:)
-  conn = PG.connect(dbname: 'bookmark_manager_test')
-  result = conn.query("SELECT * FROM #{table} WHERE id=#{id};")
-  result.first
+def persisted_data(relevant_class:, id:)
+  result = relevant_class.find_by(id: id)
 end
